@@ -1,0 +1,28 @@
+<div>
+  <div *ngIf="currentDocument.id" class="flex gap-2 items-center">
+    <input
+      type="text"
+      [(ngModel)]="currentDocument.title"
+      (blur)="updateDocumentTitle()"
+      value="{{ currentDocument.title }}"
+      placeholder="title"
+      class="font-alata text-2xl text-[#535554] bg-transparent focus:bg-w"
+    />
+    <p class="text-gray-400">{{ save_progress_status }}</p>
+  </div>
+  <ul class="flex gap-1">
+    <!-- <li class="menu-item">save</li> -->
+    <li class="menu-item" (click)="fileInput.click()">new</li>
+    <input
+      type="file"
+      #fileInput
+      style="display: none"
+      (change)="onFileSelected($event)"
+    />
+
+    <li class="menu-item" (click)="onOpenNewLabelModal()">add label</li>
+    <li class="menu-item" (click)="exportDocument()">export json</li>
+    <li class="menu-item" (click)="undo()">undo</li>
+    <li class="menu-item" (click)="redo()">redo</li>
+  </ul>
+</div>

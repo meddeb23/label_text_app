@@ -1,0 +1,35 @@
+<div #myModal class="modal block">
+  <div class="modal-content rounded">
+    <form (ngSubmit)="onSubmit()" class="flex flex-col gap-3">
+      <div class="flex justify-between items-center">
+        <h1 class="font-medium">Add new label</h1>
+        <span class="close" (click)="closeModal()">&times;</span>
+      </div>
+      <div>
+        <input
+          type="text"
+          [(ngModel)]="text"
+          name="text"
+          placeholder="new label"
+        />
+        <input
+          type="text"
+          [(ngModel)]="color"
+          name="color"
+          placeholder="new color"
+        />
+      </div>
+      <div class="space-x-2">
+        <button type="submit" class="action-button bg-green-500 text-white">
+          Add
+        </button>
+        <button
+          class="action-button bg-red-500 text-white"
+          (click)="closeModal()"
+        >
+          cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

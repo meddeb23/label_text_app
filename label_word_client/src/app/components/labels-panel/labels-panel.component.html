@@ -1,0 +1,16 @@
+<ul class="bg-[#EDF2FA] rounded-xl flex gap-2 flex-wrap p-2">
+  <li
+    *ngFor="let label of labels"
+    [ngStyle]="{
+      'background-color': label.color,
+      opacity: selectedLabel === label ? '0.8' : '1'
+    }"
+    class="label-item"
+    (click)="handleSelectLabel(label)"
+  >
+    {{ label.text }}
+    <span class="text-xl cursor-pointer" (click)="onDeleteLabel(label)"
+      >&times;</span
+    >
+  </li>
+</ul>

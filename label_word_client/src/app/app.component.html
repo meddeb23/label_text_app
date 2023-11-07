@@ -1,0 +1,65 @@
+<div class="h-screen bg-[#F9FBFD] flex flex-col">
+  <header class="px-3 pt-3 flex flex-col gap-2">
+    <!-- upper controller -->
+
+    <app-control-panel
+      [save_progress_status]="save_progress_status"
+      [(currentDocument)]="document"
+      (currentDocumentChange)="document = $event"
+      (undoEmmitter)="undo()"
+      (redoEmitter)="redo()"
+      (openNewLabelModal)="onOpenNewLabelModal()"
+    ></app-control-panel>
+
+    <!-- lower controll: label list -->
+    <app-labels-panel
+      [labels]="labels"
+      [selectedLabel]="selectedLabel"
+      (selectLabel)="selectLabel($event)"
+      (deleteLabel)="deleteLabel($event)"
+    ></app-labels-panel>
+  </header>
+  <main class="my-2 p-8 overflow-y-scroll h-full flex-auto">
+    <p
+      *ngIf="document.id; else emptyDocBlock"
+      #textContainer
+      class="leading-loose"
+    >
+      <span
+        (mouseup)="!segment.label && onTextSelection(segment.start)"
+        class="p-1 rounded"
+        *ngFor="let segment of getLabelledText()"
+        [ngStyle]="{
+          'background-color': segment.label
+            ? segment.label.label.color
+            : 'transparent'
+        }"
+        >{{ segment.text }}
+        <span *ngIf="segment.label" class="bg-white rounded text-sm p-[2px]"
+          >{{ segment.label.label.text }}
+        </span>
+        <span
+          *ngIf="segment.label"
+          class="text-2xl cursor-pointer"
+          (mouseup)="handleDeleteSegment(segment.label)"
+          >&times;</span
+        >
+      </span>
+    </p>
+    <ng-template #emptyDocBlock>
+      <h1 class="font-alata text-2xl">
+        Choose a Document to Get Started Or create a New one:
+      </h1>
+      <ul class="px-6 mt-4">
+        <li
+          *ngFor="let doc of docs"
+          (click)="selectDoc(doc)"
+          class="hover:underline list-disc cursor-pointer"
+        >
+          {{ doc.title }}
+        </li>
+      </ul>
+    </ng-template>
+  </main>
+</div>
+<app-modal (onAddLabel)="handleAddLabelEvent($event)"></app-modal>

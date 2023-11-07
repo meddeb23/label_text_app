@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
+.font-alata {
+  font-family: "Alata", sans-serif;
+}
+.menu-item {
+  @apply p-2 rounded hover:bg-[#E8EBEE] transition-colors cursor-pointer text-sm;
+}
+.label-item {
+  @apply p-2 rounded hover:bg-[#E8EBEE] transition-colors cursor-pointer text-sm;
+}
+.action-button {
+  @apply p-2 rounded hover:opacity-80 transition-opacity cursor-pointer text-sm;
+}
